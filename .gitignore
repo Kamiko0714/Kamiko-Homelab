@@ -1,23 +1,42 @@
-# --- SECURITY ---
+# --- SECRETS & CREDENTIALS (KRUSIAL) ---
 .env
 .env.local
 .env.production
 .env.development
+*.pem
+*.key
+*.json
+cert.pem
 
-# --- DEPENDENCIES ---
+# --- NODE.JS / REACT ---
 node_modules/
 dist/
 dist-ssr/
+.eslintcache
+.stylelintcache
 *.local
 
+# --- TERRAFORM ---
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+
+# --- ANSIBLE ---
+*.retry
+inventory.ini
+
 # --- LOGS & DEBUG ---
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# --- EDITOR & OS ---
+# --- EDITOR & OS FILES ---
 .vscode/
 .idea/
 .DS_Store
+Thumbs.db
 thumbs.db
