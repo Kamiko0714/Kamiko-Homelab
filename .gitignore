@@ -22,10 +22,13 @@ dist-ssr/
 *.tfstate.backup
 *.tfvars
 .terraform.lock.hcl
+*.tfplan
 
 # --- ANSIBLE ---
 *.retry
 inventory.ini
+.ansible_vault_pass
+ansible/roles/
 
 # --- LOGS & DEBUG ---
 *.log

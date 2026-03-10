@@ -15,7 +15,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared" "node2_tunnel" {
 # 3. DNS untuk Frontend
 resource "cloudflare_record" "frontend_dns" {
   zone_id = var.cloudflare_zone_id
-  name    = "app" # app.kamiko.dev
+  name    = "app"
   content = "${cloudflare_zero_trust_tunnel_cloudflared.node1_tunnel.id}.cfargotunnel.com"
   type    = "CNAME"
   proxied = true
@@ -30,18 +30,31 @@ resource "cloudflare_record" "backend_dns" {
   proxied = true
 }
 
-# 5. Tunnel untuk MikroTik (Buat Wake-on-LAN)
-resource "cloudflare_zero_trust_tunnel_cloudflared" "mikrotik_tunnel" {
-  account_id = var.cloudflare_account_id
-  name       = "mikrotik-home-gateway"
-  secret     = var.tunnel_secret
+# 6. Buat Tunnel untuk Azure
+resource "cloudflare_zero_trust_tunnel_cloudflared" "azure_tunnel" {
+  account_id = "ae1df14fae7a0766c51e7735135903ef"
+  name       = "azure-witness-server"
+  secret     = base64encode(random_password.azure_tunnel_secret.result)
 }
 
-# DNS untuk akses MikroTik
-resource "cloudflare_record" "mikrotik_dns" {
-  zone_id = var.cloudflare_zone_id
-  name    = "manage" # manage.kamiko.dev
-  content = "${cloudflare_zero_trust_tunnel_cloudflared.mikrotik_tunnel.id}.cfargotunnel.com"
+resource "random_password" "azure_tunnel_secret" {
+  length = 32
+}
+
+# 6. Buat DNS Record untuk Azure
+resource "cloudflare_record" "azure_dns" {
+  zone_id = "d27446f8d7db2ec927e3acb2849e09cb"
+  name    = "witness"
+  value   = "${cloudflare_zero_trust_tunnel_cloudflared.azure_tunnel.id}.cfargotunnel.com"
+  type    = "CNAME"
+  proxied = true
+}
+
+# 7. Definisi Tunnel Azure
+resource "cloudflare_record" "status_page" {
+  zone_id = "d27446f8d7db2ec927e3acb2849e09cb"
+  name    = "status" # status.kamiko.dev
+  value   = "${cloudflare_zero_trust_tunnel_cloudflared.azure_tunnel.id}.cfargotunnel.com"
   type    = "CNAME"
   proxied = true
 }

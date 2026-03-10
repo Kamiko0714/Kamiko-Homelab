@@ -1,0 +1,68 @@
+---
+- name: Pro Infrastructure Setup (k3s + HCI + Cloudflare)
+  hosts: homelab_nodes
+  become: yes
+  vars_files:
+    - vars.yaml
+
+  tasks:
+    ## --- PHASE 1: OS OPTIMIZATION ---
+    - name: Update and install base tools
+      apt:
+        name: [curl, htop, net-tools, open-iscsi, nfs-common]
+        state: present
+        update_cache: yes
+
+    - name: Disable SWAP (Requirement for k3s)
+      shell: |
+        swapoff -a
+        sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+      changed_when: false
+
+    ## --- PHASE 2: DOCKER & CLOUDFLARE ---
+    - name: Install Docker & Python SDK
+      apt:
+        name: [docker.io, python3-docker]
+        state: present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Deploy Cloudflared Tunnels
+      docker_container:
+        name: cloudflared
+        image: cloudflare/cloudflared:latest
+        restart_policy: always
+        command: "tunnel --no-autoupdate run --token {{ node1_token if inventory_hostname == 'node1' else node2_token }}"
+
+    ## --- PHASE 3: K3S INSTALLATION ---
+    - name: Install k3s Master (Node 1)
+      shell: curl -sfL https://get.k3s.io | sh -s - --disable traefik --write-kubeconfig-mode 644
+      when: inventory_hostname == 'node1'
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: Get k3s Token from Master
+      slurp:
+        src: /var/lib/rancher/k3s/server/node-token
+      register: k3s_token_b64
+      when: inventory_hostname == 'node1'
+
+    - name: Install k3s Agent (Node 2)
+      shell: |
+        curl -sfL https://get.k3s.io | K3S_URL=https://192.168.x.x:6443 \
+        K3S_TOKEN={{ hostvars['node1']['k3s_token_b64']['content'] | b64decode | trim }} sh -
+      when: inventory_hostname == 'node2'
+      args:
+        creates: /usr/local/bin/k3s
+
+    ## --- PHASE 4: HCI STORAGE (LONGHORN PREP) ---
+    - name: Prepare HDD 500GB for Longhorn on Node 2
+      file:
+        path: /var/lib/longhorn
+        state: directory
+        mode: '0755'
+      when: inventory_hostname == 'node2'
