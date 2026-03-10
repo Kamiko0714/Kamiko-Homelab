@@ -1,9 +1,13 @@
 #!/bin/bash
+set -e
+
 cd ~/Kamiko-Web
 
-# 1. Update file config
+echo "🚀 Starting Deployment..."
+
+# 1. Update Repository
 git fetch origin main
-git checkout main README.md deploy.sh docker-compose.yml .gitignore 2>/dev/null || true
+git reset --hard origin/main
 
 # 2. Safety check
 if [ ! -f .env ]; then
@@ -11,6 +15,19 @@ if [ ! -f .env ]; then
     exit 1
 fi
 
-# 3. Eksekusi
-docker compose down --remove-orphans
-docker compose up -d --build
+# 3. Clean Up
+echo "🧹 Cleaning up old containers..."
+sudo docker compose down --remove-orphans || true
+sudo docker compose up -d --build --force-recreate
+
+# 4. Delete container if stuck
+sudo docker rm -f kamiko-web 2>/dev/null || true
+
+# 5. Build dan Jalankan
+echo "🏗️ Building and Starting Containers..."
+sudo docker compose up -d --build --force-recreate
+
+# 6. Clean Images
+sudo docker image prune -f
+
+echo "✅ Deployment Successful!"

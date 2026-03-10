@@ -1,7 +1,6 @@
 services:
   kamiko-web:
     image: nginx:alpine
-    container_name: kamiko-web
     ports:
       - "14070:80"
     volumes:
@@ -18,3 +17,5 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     command: tunnel run
+    depends_on:
+      - kamiko-web
