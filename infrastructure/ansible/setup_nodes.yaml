@@ -53,16 +53,15 @@
 
     - name: Install k3s Agent (Node 2)
       shell: |
-        curl -sfL https://get.k3s.io | K3S_URL=https://192.168.x.x:6443 \
+        curl -sfL https://get.k3s.io | K3S_URL=https://{{ hostvars['node1']['ansible_host'] }}:6443 \
         K3S_TOKEN={{ hostvars['node1']['k3s_token_b64']['content'] | b64decode | trim }} sh -
       when: inventory_hostname == 'node2'
       args:
         creates: /usr/local/bin/k3s
 
-    ## --- PHASE 4: HCI STORAGE (LONGHORN PREP) ---
-    - name: Prepare HDD 500GB for Longhorn on Node 2
-      file:
-        path: /var/lib/longhorn
-        state: directory
-        mode: '0755'
-      when: inventory_hostname == 'node2'
+    ## --- PHASE 4: NODE LABELING (Affinity Setup) ---
+    # Menambahkan label agar FluxCD/K3s tahu mana SSD dan mana HDD
+    - name: Label Node as SSD or HDD
+      shell: "kubectl label node {{ inventory_hostname }} disktype={{ disk_type }} --overwrite"
+      delegate_to: node1
+      changed_when: false
