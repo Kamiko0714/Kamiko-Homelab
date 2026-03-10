@@ -24,6 +24,7 @@ jobs:
       - name: 🏗️ Install & Build
         working-directory: dashboard-web/main-porto
         run: |
+          ls -la
           npm install
           npm run build
 
