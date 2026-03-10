@@ -15,7 +15,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: 🏗️ Install & Build
         working-directory: ./dashboard-web/main-porto
@@ -46,7 +45,7 @@ jobs:
             cd ~/Kamiko-Web
             rm -rf src public node_modules package.json package-lock.json index.html
             
-            sudo chown -R ${{ secrets.AZURE_VM_USER }}:${{ secrets.AZURE_VM_USER }} dist
+            sudo chown -R ${{ secrets.AZURE_VM_USER }}:${{ secrets.AZURE_VM_USER }} .
             chmod -R 755 dist
             
             if [ -f "deploy.sh" ]; then
