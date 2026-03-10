@@ -16,15 +16,9 @@ jobs:
         with:
           node-version: 20
 
-      - name: 🔍 Debug Path
-        run: |
-          pwd
-          ls -R
-
       - name: 🏗️ Install & Build
         working-directory: dashboard-web/main-porto
         run: |
-          ls -la
           npm install
           npm run build
 
@@ -49,10 +43,13 @@ jobs:
           port: 22
           script: |
             cd ~/Kamiko-Web
+            
             rm -rf src public node_modules package.json package-lock.json index.html
             
             sudo chown -R ${{ secrets.AZURE_VM_USER }}:${{ secrets.AZURE_VM_USER }} .
             chmod -R 755 dist
+            
+            sudo docker rm -f kamiko-web || true
             
             if [ -f "deploy.sh" ]; then
               chmod +x deploy.sh

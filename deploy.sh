@@ -17,6 +17,7 @@ fi
 
 # 3. Clean Up
 echo "🧹 Cleaning up old containers..."
+sudo docker rm -f kamiko-web || true
 sudo docker compose down --remove-orphans || true
 sudo docker compose up -d --build --force-recreate
 
