@@ -37,9 +37,34 @@ export const translations = {
     project_3_desc: "Infrastructure as Code",
     project_3_detail: "Setting up a production-ready Kubernetes cluster with Infrastructure as Code (Terraform & Ansible) for scalable applications.",
     
-    project_4_title: "Security Auditor",
-    project_4_desc: "System Health Metrics",
-    project_4_detail: "Automated security auditing tool designed to scan system vulnerabilities and provide health metrics reports.",
+    project_4_title: "Home-Lab",
+    project_4_desc: "A lean, GitOps-driven K3s infrastructure utilizing high-performance observability via VictoriaMetrics and secure tunneling for seamless, edge-ready application delivery.",
+    project_4_detail:  `1. Orchestration & Compute
+Engine: K3s over Docker. Leveraging a lightweight Kubernetes distribution to maximize CPU/RAM overhead for workloads rather than the control plane.
+
+Runtime: Standardized Docker runtime for consistent container lifecycle management across all nodes.
+
+2. Storage & Data Locality (The "Local-First" Strategy)
+Persistence: Utilizing Node Affinity and Local Persistent Volumes instead of distributed SDS (like Longhorn) to eliminate network-induced latency.
+
+Database Ops: Managing SQLite at scale. This simplifies state management and removes the need for complex DB clustering, shifting the focus to robust file-based backup strategies (e.g., S3 snapshots).
+
+3. Continuous Delivery (GitOps Workflow)
+Source of Truth: Internal Gitea instance serving as the central manifest repository.
+
+Automation: FluxCD for declarative infrastructure. All cluster states—from ingress to apps—are automatically reconciled, ensuring "Zero-Touch" deployments and preventing configuration drift.
+
+4. Networking & Secure Access
+Connectivity: Tunnel-based Ingress (e.g., Cloudflare/Tailscale) replaces traditional LoadBalancers or MetalLB.
+
+Security: Reduces the attack surface by eliminating public-facing ports, allowing the cluster to remain behind a NAT while staying accessible.
+
+5. High-Efficiency Observability
+Telemetry: VictoriaMetrics for time-series data and VictoriaLogs for log aggregation.
+
+Performance: This stack provides significantly higher ingestion rates and better compression ratios compared to Prometheus/Loki, making it ideal for resource-constrained environments.
+
+Visualization: Grafana as the unified pane of glass for both system metrics and application logs.`,
     
     view_detail: "View Detail",
     visit_repo: "Repo",
@@ -86,9 +111,32 @@ export const translations = {
     project_3_desc: "Infrastructure as Code",
     project_3_detail: "Membangun klaster Kubernetes siap produksi dengan Infrastructure as Code (Terraform & Ansible) untuk aplikasi yang skalabel.",
     
-    project_4_title: "Security Auditor",
-    project_4_desc: "Metrik Kesehatan Sistem",
-    project_4_detail: "Alat audit keamanan otomatis yang dirancang untuk memindai kerentanan sistem dan memberikan laporan metrik kesehatan.",
+    project_4_title: "Home-Lab",
+    project_4_desc: "Infrastruktur Hybrid-Cloud berbasis K3s yang mengoptimalkan GitOps Workflow dan High-Efficiency Observability tanpa ketergantungan pada external load balancer.",
+    project_4_detail: `1. Compute & Orchestration
+Engine: Menggunakan K3s di atas Docker runtime untuk meminimalkan footprint memori tanpa mengurangi fungsionalitas Kubernetes.
+
+Provisioning: Fokus pada lightweight virtualization, cocok untuk lingkungan edge atau on-premise dengan resource terbatas.
+
+2. Storage Strategy (The "No-Longhorn" Approach)
+Data Locality: Menggunakan Local Persistent Volumes dengan Node Affinity.
+
+Engine: SQLite. Dari sisi Ops, ini mengurangi kompleksitas replikasi data di layer network, namun menuntut kebijakan backup file-level yang ketat (misal: menggunakan CronJob untuk snapshot db ke S3/Minio).
+
+3. GitOps & Automation (The Pipeline)
+Source of Truth: Gitea bertindak sebagai internal Git server.
+
+Reconciliation: FluxCD melakukan sinkronisasi otomatis. IT Ops hanya perlu mengelola manifest YAML di repo; perubahan infrastruktur terjadi secara deklaratif tanpa kubectl apply manual.
+
+4. Connectivity & Networking
+Ingress Path: Menggantikan MetalLB dengan Tunneling (seperti Cloudflare Tunnel atau Tailscale).
+
+Security: Menghilangkan attack surface karena tidak ada port publik yang terbuka (No Public IP needed).
+
+5. Full-Stack Observability
+Metrics & Logs: Mengintegrasikan VictoriaMetrics (TSDB) dan VictoriaLogs.
+
+Efficiency: Solusi ini jauh lebih hemat storage dan CPU dibandingkan Prometheus/Loki, memungkinkan retensi data yang lebih lama pada hardware yang sama.`,
     
     view_detail: "Lihat Detail",
     visit_repo: "Repo",
@@ -134,7 +182,7 @@ export const translations = {
   project_3_title: "K8s Cluster Ops",
   project_3_desc: "Infrastructure as Code",
   project_3_detail: "TerraformおよびAnsibleを用いたInfrastructure as Codeにより、スケーラブルなアプリケーション向けの本番環境対応Kubernetesクラスターを構築しました。",
-  
+    
   project_4_title: "Security Auditor",
   project_4_desc: "システムヘルスメトリクス",
   project_4_detail: "システムの脆弱性をスキャンし、ヘルスメトリクスレポートを提供する自動セキュリティ監査ツールを開発しました。",
