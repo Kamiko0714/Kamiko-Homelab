@@ -1,0 +1,23 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: podinfo
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: http://git.kamiko.dev/kamiko/Kamiko-Homelab.git
+  ref:
+    branch: main
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-base
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: "./infrastructure/gitops/base"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: podinfo
