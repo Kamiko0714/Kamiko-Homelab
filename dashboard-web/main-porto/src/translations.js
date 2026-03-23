@@ -1,5 +1,5 @@
-// import project1Img from './assets/projects/project_1.png';
-// import project2Img from './assets/projects/project_2.png';
+import project1Img from './assets/projects/project_1.png';
+import project2Img from './assets/projects/project_2.png';
 import project3Img from './assets/projects/project_3.png';
 import project4Img from './assets/projects/project_4.jpg';
 
@@ -49,6 +49,7 @@ export const translations = {
     High Availability: Provides VM-level HA, automatically restarting nodes on another host if hardware fails.`,
 
     project_2_title: "Home-Lab (Bare Metal K3s Cluster)",
+    project_2_image: project2Img,
     project_2_desc: "A lean, GitOps-driven K3s infrastructure utilizing high-performance observability via VictoriaMetrics and secure tunneling for seamless application delivery.",
     project_2_detail: `1. Orchestration & Compute\n
     Engine: K3s over Docker. Leveraging a lightweight distribution to maximize resources for workloads rather than the control plane.\n
@@ -145,6 +146,7 @@ export const translations = {
     Safety Net: Proxmox Backup Server (PBS) untuk snapshot level VM.`,
 
     project_2_title: "Home-Lab (Bare Metal K3s Cluster)",
+    project_2_image: project2Img,
     project_2_desc: "Infrastruktur Hybrid-Cloud berbasis K3s yang mengoptimalkan GitOps Workflow dan High-Efficiency Observability tanpa ketergantungan pada external load balancer.",
     project_2_detail: `1. Compute & Orchestration\n
     Engine: K3s di atas Docker runtime untuk meminimalkan footprint memori.\n
@@ -240,6 +242,7 @@ export const translations = {
     高可用性: VMレベルのHAを提供し、ハードウェア故障時に別のホストでノードを自動再起動。`,
 
     project_2_title: "Home-Lab (Bare Metal K3s Cluster)",
+    project_2_image: project2Img,
     project_2_desc: "GitOps駆動の軽量なK3sインフラ。VictoriaMetricsによる高性能な監視と、セキュアなトンネル接続によるシームレスなアプリケーション配信を実現。",
     project_2_detail: `1. オーケストレーションと計算\n
     エンジン: K3s over Docker。軽量なディストリビューションにより、リソースをワークロードに最大限割り当て。\n
