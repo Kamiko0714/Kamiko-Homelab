@@ -61,9 +61,30 @@ export const translations = {
     Telemetry: VictoriaMetrics and VictoriaLogs for high-performance ingestion and compression.\n
     Visualization: Grafana as the unified pane for system metrics and logs.`,
 
-    project_3_title: "Voltnesia Smart Monitoring",
-    project_3_desc: "IoT Monitoring Electricity Cost",
-    project_3_detail: "Building an IoT-based monitoring system using MQTT protocol for real-time electricity cost monitoring and data logging.",
+    project_3_title: "Undergraduate Thesis: Open-Source Laboratory Infrastructure (Clustering & Automation)",
+    project_3_desc: "My final college project focusing on transforming legacy hardware into an efficient, automated, and monitored computing cluster using Kubernetes and Ansible.",
+    project_3_detail: `This project is my Undergraduate Thesis, titled "Implementasi Sistem Monitoring, Clustering, dan Otomatisasi Server Berbasis Open Source untuk Infrastruktur Laboratorium Komputer".\n\n
+    1. Infrastructure & Clustering\n
+    Orchestration: Utilizing Kubernetes (MicroK8s) to integrate heterogeneous hardware (Intel i5, i3, and Xeon E5) into a unified resource pool.\n\n
+    2. Server Automation\n
+    Tooling: Ansible for end-to-end configuration management. Automating OS updates and software deployment across all nodes to ensure environment consistency.\n\n
+    3. Monitoring & Observability\n
+    Stack: Prometheus and Grafana for real-time telemetry. Provides full visibility into cluster health and performance metrics.\n\n
+    4. Thesis Outcomes\n
+    Efficiency: Successfully repurposed legacy hardware to meet modern DevOps standards with 0% packet loss and high reliability during stress tests.`,
+
+    project_4_title: "Voltnesia: IoT-Based Smart Metering System",
+    project_4_desc: "A final project for the IoT Engineer Camp (Indobot Academy) focusing on real-time electricity consumption monitoring and automated overload protection.",
+    project_4_detail: `This project was developed as a Capstone Project for the "Internet of Things (IoT) Engineer Camp" certification at Indobot Academy.\n\n
+    1. Monitoring & Accuracy\n
+    Sensors: Integrating PZEM-004t and ZMPT-101b sensors to measure current, voltage, frequency, and energy consumption with high precision.\n\n
+    2. Smart Protection System\n
+    Automation: Implementing a 5V Relay mechanism that acts as an automatic circuit breaker (Normally Closed) if an electrical overload is detected, coupled with a buzzer alarm for safety alerts.\n\n
+    3. Connectivity & Platform\n
+    Protocol: Using MQTT for fast and reliable data transmission from the ESP32 microcontroller to the dashboard.\n
+    Interface: Real-time data visualization via an OLED display on the device and a web/mobile-based dashboard for remote monitoring.\n\n
+    4. Hardware & Implementation\n
+    Core: Powered by ESP32, programmed using C++ (Arduino IDE), and designed for residential energy efficiency and preventive maintenance against electrical hazards.`,
 
     view_detail: "View Detail",
     visit_repo: "Repo",
@@ -135,9 +156,30 @@ export const translations = {
     Metrics & Logs: Integrasi VictoriaMetri cs dan VictoriaLogs yang hemat resource.\n
     Visualization: Grafana sebagai dashboard terpadu.`,
 
-    project_3_title: "Voltnesia Smart Monitoring",
-    project_3_desc: "Monitoring Biaya Listrik Berbasis IoT",
-    project_3_detail: "Membangun sistem pemantauan berbasis IoT menggunakan protokol MQTT untuk monitoring biaya listrik secara real-time dan pencatatan data.",
+    project_3_title: "Tugas Akhir: Infrastruktur Lab Open-Source (Clustering & Otomatisasi)",
+    project_3_desc: "Proyek skripsi saya yang berfokus pada transformasi perangkat keras lama menjadi klaster komputasi terpadu yang otomatis dan termonitor menggunakan Kubernetes dan Ansible.",
+    project_3_detail: `Proyek ini merupakan Tugas Akhir (Skripsi) saya dengan judul "Implementasi Sistem Monitoring, Clustering, dan Otomatisasi Server Berbasis Open Source untuk Infrastruktur Laboratorium Komputer".\n\n
+    1. Infrastruktur & Clustering\n
+    Orkestrasi: Implementasi Kubernetes (MicroK8s) untuk menyatukan perangkat keras heterogen (Intel i5, i3, dan Xeon E5) menjadi satu kesatuan sumber daya.\n\n
+    2. Otomatisasi Server\n
+    Alat: Penggunaan Ansible untuk manajemen konfigurasi menyeluruh. Mengotomatisasi pembaruan OS dan instalasi perangkat lunak pada seluruh node.\n\n
+    3. Monitoring & Observabilitas\n
+    Stack: Prometheus dan Grafana untuk pengambilan data real-time. Memberikan visibilitas penuh terhadap kesehatan sistem dan penggunaan sumber daya.\n\n
+    4. Hasil Penelitian\n
+    Efisiensi: Berhasil mengoptimalkan perangkat keras lama agar sesuai dengan standar DevOps modern dengan tingkat reliabilitas tinggi saat pengujian beban.`,
+
+    project_4_title: "Voltnesia: Sistem Smart Meter Berbasis IoT",
+    project_4_desc: "Proyek akhir sertifikasi IoT Engineer Camp (Indobot Academy) untuk pemantauan konsumsi listrik real-time dan perlindungan otomatis kelebihan beban.",
+    project_4_detail: `Proyek ini dikembangkan sebagai Capstone Project untuk program sertifikasi "Internet of Things (IoT) Engineer Camp" di Indobot Academy.\n\n
+    1. Pemantauan & Akurasi\n
+    Sensor: Mengintegrasikan sensor PZEM-004t dan ZMPT-101b untuk mengukur arus, tegangan, frekuensi, dan daya listrik dengan presisi tinggi.\n\n
+    2. Sistem Proteksi Pintar\n
+    Otomatisasi: Implementasi mekanisme Relay 5V sebagai pemutus arus otomatis (Normally Closed) jika terdeteksi overload, dilengkapi dengan alarm buzzer sebagai peringatan bahaya.\n\n
+    3. Konektivitas & Platform\n
+    Protokol: Menggunakan protokol MQTT untuk transmisi data yang cepat dan ringan dari mikrokontroler ESP32 ke dashboard.\n
+    Antarmuka: Visualisasi data secara real-time melalui layar OLED pada perangkat serta dashboard berbasis web/mobile untuk pemantauan jarak jauh.\n\n
+    4. Perangkat Keras & Implementasi\n
+    Inti Sistem: Berbasis ESP32, diprogram menggunakan C++ (Arduino IDE), dan dirancang untuk efisiensi energi rumah tangga serta pencegahan dini risiko kebakaran listrik.`,
 
     view_detail: "Lihat Detail",
     visit_repo: "Repo",
@@ -208,9 +250,36 @@ export const translations = {
     テレメトリ: 高性能な VictoriaMetrics と VictoriaLogs の統合。\n
     可視化: Grafanaを統合ダッシュボードとして使用。`,
 
-    project_3_title: "Voltnesia Smart Monitoring",
-    project_3_desc: "IoTによる電力コスト監視",
-    project_3_detail: "MQTTプロトコルを活用し、電力コストをリアルタイムで監視・記録するIoTベースのモニタリングシステムを構築しました。",
+    project_3_title: "卒業論文： オープンソース・ラボラトリー・インフラ (クラスタリングと自動化)",
+    project_3_desc: "KubernetesとAnsibleを活用し、古いハードウェアを自動化・監視された効率的なコンピューティングクラスタへと転換した卒業研究プロジェクト。",
+    project_3_detail: `1. インフラストラクチャとクラスタリング\n
+    オーケストレーション: Kubernetes (MicroK8s) を実装し、Intel i5、i3、Xeon E5 などの異なる仕様を持つ5台のPCを単一のコンピューティングリソースプールに統合。\n
+    リソース管理: 各ノード 8〜12 GB のRAMを効率的に活用し、複数の同時ユーザーや実習セッションをサポート。\n\n
+    2. サーバーの自動化\n
+    ツール: Ansibleを使用したエンドツーエンドの構成管理とデプロイメント。\n
+    ワークフロー: OSのアップデート、Dockerランタイムの設定、ソフトウェアのインストールなどの反復作業を全ノードで自動化し、環境の一貫性を確保。\n\n
+    3. 監視とオブザーバビリティ\n
+    メトリクス収集: PrometheusによるCPU、RAM、ネットワークメトリクスのリアルタイム収集。\n
+    可視化: 中央集権的なGrafanaダッシュボードにより、高負荷時のクラスタの稼働状況とパフォーマンスを完全に可視化。\n\n
+    4. ネットワークとアクセス\n
+    リバースプロキシ: Nginxをアプリケーション配信とトラフィック管理のゲートウェイとして活用。\n
+    信頼性: ストレステスト下でも低遅延 (0.04〜0.29 ms) とパケットロス 0% を維持。\n\n
+    5. 持続可能性と効率性\n
+    レガシー最適化: 旧式のハードウェアを再利用することで、新規投資を抑えつつモダンなDevOps標準を維持。\n
+    拡張性: 適応性が高く、持続可能なラボ管理フレームワークの基礎を提供。`,
+
+    project_4_title: "Voltnesia：IoTベースのスマートメーターシステム",
+    project_4_desc: "Indobot AcademyのIoTエンジニアキャンプの最終プロジェクト。電力消費のリアルタイム監視と過負荷自動保護システムを実現。",
+    project_4_detail: `このプロジェクトは、Indobot Academyの「Internet of Things (IoT) Engineer Camp」認定プログラムのキャップストーンプロジェクトとして開発されました。\n\n
+    1. 監視と精度\n
+    センサー: PZEM-004tおよびZMPT-101bセンサーを統合し、電流、電圧、周波数、電力量を高精度に測定。\n\n
+    2. スマート保護システム\n
+    自動化: 電気の過負荷（オーバーロード）を検出した場合に、5Vリレーを使用して自動的に回路を遮断（ノーマリークローズ）する機能を実装。安全警告用のブザーも搭載。\n\n
+    3. 接続性とプラットフォーム\n
+    プロトコル: MQTTプロトコルを採用し、ESP32マイコンからダッシュボードへ高速かつ軽量なデータ送信を実現。\n
+    インターフェース: デバイス上のOLEDディスプレイおよびWeb/モバイルベースのダッシュボードを通じて、リアルタイムでデータを可視化。\n\n
+    4. ハードウェアと実装\n
+    コア: ESP32を搭載し、C++ (Arduino IDE) でプログラミング。家庭用エネルギー効率の向上と電気事故の予防を目的として設計。`,
 
     view_detail: "詳細を見る",
     visit_repo: "リポジトリ",
