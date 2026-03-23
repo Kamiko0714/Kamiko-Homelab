@@ -773,3 +773,54 @@ button:hover, .view-detail-btn:hover {
   .proj-title { font-size: 1.2rem !important; }
   .proj-desc { font-size: 0.9rem !important; white-space: normal !important; }
 }
+
+/* ===================================================
+   PROJECT STATUS BADGES
+   =================================================== */
+.status-badge {
+  font-size: 0.65rem !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+
+/* Variant Colors */
+.status-planned {
+  color: #ffaa00;
+  border-color: rgba(255, 170, 0, 0.3);
+  box-shadow: 0 0 10px rgba(255, 170, 0, 0.1);
+}
+
+.status-running {
+  color: #00bfff;
+  border-color: rgba(0, 191, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+  animation: status-pulse-blue 2s infinite;
+}
+
+.status-completed {
+  color: var(--neon);
+  border-color: var(--glass-border);
+  box-shadow: 0 0 10px var(--neon-dim);
+}
+
+/* Dot Indicator */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@keyframes status-pulse-blue {
+  0% { box-shadow: 0 0 5px rgba(0, 191, 255, 0.2); opacity: 1; }
+  50% { box-shadow: 0 0 20px rgba(0, 191, 255, 0.5); opacity: 0.8; }
+  100% { box-shadow: 0 0 5px rgba(0, 191, 255, 0.2); opacity: 1; }
+}

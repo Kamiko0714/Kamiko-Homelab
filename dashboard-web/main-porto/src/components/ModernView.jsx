@@ -116,20 +116,24 @@ export default function ModernView({ t, lang }) {
           <div className="card-badge-shimmer">{t.projects_title}</div>
           <div className="projects-grid-2x2"> 
             {[
-              { title: t.project_1_title, desc: t.project_1_desc, detail: t.project_1_detail, tools: [Globe] },
-              { title: t.project_2_title, desc: t.project_2_desc, detail: t.project_2_detail, tools: [Lightbulb] },
-              { title: t.project_3_title, desc: t.project_3_desc, detail: t.project_3_detail, tools: [Settings] },
-              { title: t.project_4_title, desc: t.project_4_desc, detail: t.project_4_detail, tools: [Shield] }
+              { title: t.project_1_title, desc: t.project_1_desc, detail: t.project_1_detail, tools: [Globe], status: "Planned", statusClass: "status-planned" },
+              { title: t.project_2_title, desc: t.project_2_desc, detail: t.project_2_detail, tools: [Lightbulb], status: "Running", statusClass: "status-running" },
+              { title: t.project_3_title, desc: t.project_3_desc, detail: t.project_3_detail, tools: [Settings], status: "Completed", statusClass: "status-completed" },
+              { title: t.project_4_title, desc: t.project_4_desc, detail: t.project_4_detail, tools: [Shield], status: "Completed", statusClass: "status-completed" }
             ].map((proj, i) => (
               <div key={i} className="modern-card"> 
-                <div className="project-thumb-mini">
+                <div className="project-thumb-mini" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                   <div className="tool-icons-row">
                     {proj.tools.map((Icon, idx) => (
                       <Icon key={idx} size={14} color="#00ff00" />
                     ))}
                   </div>
+                  <div className={`status-badge ${proj.statusClass}`}>
+                    <span className="status-dot"></span>
+                    {proj.status}
+                  </div>
                 </div>
-                <h4 className="proj-title">{proj.title}</h4>
+                <h4 className="proj-title" style={{ marginTop: '15px' }}>{proj.title}</h4>
                 <p className="proj-desc">{proj.desc}</p>
                 <div className="project-actions">
                   <button className="btn-mini-solid" onClick={() => setSelectedProject(proj)}>
