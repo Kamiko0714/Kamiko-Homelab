@@ -811,7 +811,6 @@ button:hover, .view-detail-btn:hover {
   box-shadow: 0 0 10px var(--neon-dim);
 }
 
-/* Dot Indicator */
 .status-dot {
   width: 6px;
   height: 6px;
@@ -823,4 +822,35 @@ button:hover, .view-detail-btn:hover {
   0% { box-shadow: 0 0 5px rgba(0, 191, 255, 0.2); opacity: 1; }
   50% { box-shadow: 0 0 20px rgba(0, 191, 255, 0.5); opacity: 0.8; }
   100% { box-shadow: 0 0 5px rgba(0, 191, 255, 0.2); opacity: 1; }
+}
+
+.modal-image-container {
+  position: relative;
+  margin-bottom: 25px;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--neon-dim);
+}
+
+.project-detail-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.modal-body-text {
+  white-space: pre-line;
+  color: #cfd8dc;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--neon);
+  box-shadow: 0 0 10px var(--neon-glow);
 }

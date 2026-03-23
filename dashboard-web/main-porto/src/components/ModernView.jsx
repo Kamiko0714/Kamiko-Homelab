@@ -116,10 +116,10 @@ export default function ModernView({ t, lang }) {
           <div className="card-badge-shimmer">{t.projects_title}</div>
           <div className="projects-grid-2x2"> 
             {[
-              { title: t.project_1_title, desc: t.project_1_desc, detail: t.project_1_detail, tools: [Globe], status: "Planned", statusClass: "status-planned" },
-              { title: t.project_2_title, desc: t.project_2_desc, detail: t.project_2_detail, tools: [Lightbulb], status: "Running", statusClass: "status-running" },
-              { title: t.project_3_title, desc: t.project_3_desc, detail: t.project_3_detail, tools: [Settings], status: "Completed", statusClass: "status-completed" },
-              { title: t.project_4_title, desc: t.project_4_desc, detail: t.project_4_detail, tools: [Shield], status: "Completed", statusClass: "status-completed" }
+              { title: t.project_1_title, desc: t.project_1_desc, detail: t.project_1_detail, image: t.project_1_image, tools: [Globe], status: "Planned", statusClass: "status-planned" },
+              { title: t.project_2_title, desc: t.project_2_desc, detail: t.project_2_detail, image: t.project_2_image, tools: [Lightbulb], status: "Running", statusClass: "status-running" },
+              { title: t.project_3_title, desc: t.project_3_desc, detail: t.project_3_detail, image: t.project_3_image, tools: [Settings], status: "Completed", statusClass: "status-completed" },
+              { title: t.project_4_title, desc: t.project_4_desc, detail: t.project_4_detail, image: t.project_4_image, tools: [Shield], status: "Completed", statusClass: "status-completed" }
             ].map((proj, i) => (
               <div key={i} className="modern-card"> 
                 <div className="project-thumb-mini" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
@@ -292,21 +292,42 @@ export default function ModernView({ t, lang }) {
       )}
 
       {selectedProject && (
-        <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
-          <div className="modal-content cyberpunk-border" onClick={e => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3 style={{ color: '#00ff00' }}>{selectedProject.title}</h3>
-              <button className="close-btn" onClick={() => setSelectedProject(null)}>×</button>
+      <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
+        <div className="modal-content cyberpunk-border" onClick={e => e.stopPropagation()}>
+          <div className="modal-header">
+            <h3 style={{ color: '#00ff00', textTransform: 'uppercase' }}>{selectedProject.title}</h3>
+            <button className="close-modal-btn" onClick={() => setSelectedProject(null)}>
+              <X size={18} />
+            </button>
+          </div>
+          
+          <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto', paddingRight: '10px' }}>
+            {selectedProject.image && (
+              <div className="modal-image-wrapper" style={{ marginBottom: '20px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #333' }}>
+                <img 
+                  src={selectedProject.image} 
+                  alt="Architecture Diagram" 
+                  style={{ width: '100%', height: 'auto', display: 'block' }} 
+                />
+              </div>
+            )}
+            <div 
+              className="about-text-glow" 
+              style={{ whiteSpace: 'pre-line', lineHeight: '1.6', fontSize: '0.95rem' }}
+            >
+              {selectedProject.detail}
             </div>
-            <div className="modal-body">
-              <p className="about-text-glow">{selectedProject.detail}</p>
-              <div className="modal-tools-row" style={{ marginTop: '15px' }}>
-                {selectedProject.tools.map((Icon, idx) => <Icon key={idx} size={20} color="#00ff00" />)}
+            <div className="modal-tools-row" style={{ marginTop: '25px', paddingTop: '15px', borderTop: '1px solid #222' }}>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                {selectedProject.tools.map((Icon, idx) => (
+                  <Icon key={idx} size={20} color="#00ff00" />
+                ))}
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
+    )}
     </div>
   );
 }
