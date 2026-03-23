@@ -31,6 +31,7 @@ export const translations = {
     download_cv: "Download CV",
 
     project_1_title: "Home-Lab (Proxmox VE K3s Cluster)",
+    project_1_image: project1Img,
     project_1_desc: "A high-availability virtualization-ready K3s infrastructure hosted on Proxmox VE, leveraging GitOps automation, optimized local storage affinity, and secure tunnel-based ingress.",
     project_1_detail: `1. Compute & Virtualization Layer\n
     Hypervisor: Proxmox VE (Debian-based). Managing the lifecycle of K3s nodes via Virtual Machines (VMs) or LXC containers.\n
@@ -127,6 +128,7 @@ export const translations = {
     download_cv: "Unduh CV",
 
     project_1_title: "Home-Lab (Proxmox VE K3s Cluster)",
+    project_1_image: project1Img,
     project_1_desc: "Infrastruktur K3s berbasis virtualisasi Proxmox VE yang mengoptimalkan efisiensi resource melalui GitOps (FluxCD) dan observabilitas performa tinggi tanpa dependensi pada storage terdistribusi.",
     project_1_detail: `1. Layer Virtualisasi & Compute\n
     Hypervisor: Proxmox VE. Mengelola lifecycle VM atau LXC.\n
@@ -224,6 +226,7 @@ export const translations = {
     download_cv: "CVをダウンロード",
 
     project_1_title: "Home-Lab (Proxmox VE K3s Cluster)",
+    project_1_image: project1Img,
     project_1_desc: "Proxmox VE上で構築された高可用性K3sインフラ。GitOps自動化、最適化されたローカルストレージアフィニティ、およびセキュアなトンネル接続を活用。",
     project_1_detail: `1. コンピュート & 仮想化レイヤー\n
     ハイパーバイザ: Proxmox VE (Debianベース)。VMまたはLXCコンテナを介してK3sノードのライフサイクルを管理。\n
