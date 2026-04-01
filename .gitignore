@@ -1,0 +1,60 @@
+# --- GENERAL ---
+node_modules/
+.DS_Store
+.vscode/
+.idea/
+
+# --- KUBERNETES & FLUXCD ---
+.kube/
+config
+*.kubeconfig
+.flux.yaml
+secret-*.yaml
+*-secret.yaml
+.env
+.env.*
+
+# --- CLOUDFLARE ---
+infrastructure/ansible/*.json
+gitops/base/cloudflare-auth.yaml
+*.pem
+cert.pem
+tunnel-credentials.json
+
+# --- DOCKER ---
+.docker/
+docker-compose.override.yml
+
+# --- VICTORIA METRICS & STORAGE ---
+*.db
+*.db-shm
+*.db-wal
+data/
+storage/
+
+# --- PYTHON ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# --- TERRAFORM SECRETS ---
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+crash.log
+**/.terraform/*
+*.tfvars.json
+*.tfstate.*
+TF_TOKEN_app_terraform_io.yaml
+
+# --- ANSIBLE & CREDENTIALS ---
+inventory.ini
+vars.yaml
+*.retry
+
+# Scripts/Binary
+**/*.exe

@@ -1,0 +1,21 @@
+services:
+  kamiko-web:
+    image: nginx:alpine
+    ports:
+      - "14070:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: always
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    command: tunnel run
+    depends_on:
+      - kamiko-web

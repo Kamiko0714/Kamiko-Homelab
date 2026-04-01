@@ -1,0 +1,24 @@
+---
+- name: Setup K3s Cluster Nodes
+  hosts: nodes
+  become: true
+  tasks:
+    # Logic untuk Master (Node-1)
+    - name: Install K3s Server on Node-1
+      shell: curl -sfL https://get.k3s.io | sh -
+      when: inventory_hostname == 'node-1'
+      register: k3s_server_install
+
+    # Logic untuk Agent (Node-2)
+    - name: Install K3s Agent on Node-2
+      shell: |
+        curl -sfL https://get.k3s.io | K3S_URL=https://192.168.88.240:6443 \
+        K3S_TOKEN="K1097a80cd230ef9eaec55849c3d5cf32aa3acfacd0b8776caec7457b975ce32682::server:d64a73a154769b09eb295bdc26955f61" sh -
+      when: inventory_hostname == 'node-2'
+      register: k3s_agent_install
+
+    - name: Verify Service Status
+      systemd:
+        name: "{{ 'k3s' if inventory_hostname == 'node-1' else 'k3s-agent' }}"
+        state: started
+        enabled: yes

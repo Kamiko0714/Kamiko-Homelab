@@ -1,0 +1,9 @@
+# Token didapat dari: terraform output node1_tunnel_token
+node1_token: "{{ lookup('env', '') }}"
+
+# Token didapat dari: terraform output node2_tunnel_token
+node2_token: "{{ lookup('env', '') }}"
+
+# Konfigurasi Disk (Digunakan untuk labeling)
+# Pastikan variabel ini sinkron dengan inventory.ini
+disk_type: "{{ 'ssd' if inventory_hostname == 'node-1' else 'hdd' }}"

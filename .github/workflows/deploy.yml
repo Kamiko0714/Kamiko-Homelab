@@ -1,0 +1,57 @@
+name: Deploy Kamiko Portfolio
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📡 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🏗️ Install & Build
+        working-directory: dashboard-web/main-porto
+        run: |
+          npm install
+          npm run build
+
+      - name: 📤 Upload Build Files (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.AZURE_VM_IP }}
+          username: ${{ secrets.AZURE_VM_USER }}
+          key: ${{ secrets.AZURE_VM_SSH_KEY }}
+          port: 22
+          source: "dashboard-web/main-porto/dist/*"
+          target: "~/Kamiko-Web/dist"
+          strip_components: 3
+          overwrite: true
+
+      - name: 🚀 Finalize Deployment (SSH)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AZURE_VM_IP }}
+          username: ${{ secrets.AZURE_VM_USER }}
+          key: ${{ secrets.AZURE_VM_SSH_KEY }}
+          port: 22
+          script: |
+            cd ~/Kamiko-Web
+            
+            rm -rf src public node_modules package.json package-lock.json index.html
+            
+            sudo chown -R ${{ secrets.AZURE_VM_USER }}:${{ secrets.AZURE_VM_USER }} .
+            chmod -R 755 dist
+            
+            sudo docker rm -f kamiko-web || true
+            
+            if [ -f "deploy.sh" ]; then
+              chmod +x deploy.sh
+              ./deploy.sh
+            fi
