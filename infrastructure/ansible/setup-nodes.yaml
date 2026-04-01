@@ -1,24 +1,44 @@
 ---
-- name: Setup K3s Cluster Nodes
+- name: Setup K3s Cluster and Node Labeling
   hosts: nodes
   become: true
   tasks:
-    # Logic untuk Master (Node-1)
+    # 1. Install Master di Node-1
     - name: Install K3s Server on Node-1
       shell: curl -sfL https://get.k3s.io | sh -
       when: inventory_hostname == 'node-1'
-      register: k3s_server_install
 
-    # Logic untuk Agent (Node-2)
+    # 2. Ambil Token Terbaru dari Node-1 (Agar tidak bocor/hardcode)
+    - name: Get K3s Node Token from Master
+      shell: cat /var/lib/rancher/k3s/server/node-token
+      register: master_token
+      when: inventory_hostname == 'node-1'
+
+    # 3. Bagikan Token ke Node-2 secara internal (Memory only)
+    - name: Set Token Fact
+      set_fact:
+        k3s_token: "{{ hostvars['node-1']['master_token']['stdout'] }}"
+      run_once: true
+
+    # 4. Install Agent di Node-2 pakai Token dari langkah 3
     - name: Install K3s Agent on Node-2
       shell: |
         curl -sfL https://get.k3s.io | K3S_URL=https://192.168.88.240:6443 \
-        K3S_TOKEN="K1097a80cd230ef9eaec55849c3d5cf32aa3acfacd0b8776caec7457b975ce32682::server:d64a73a154769b09eb295bdc26955f61" sh -
+        K3S_TOKEN="{{ k3s_token }}" sh -
       when: inventory_hostname == 'node-2'
-      register: k3s_agent_install
 
+    # 5. Pastikan Service Jalan
     - name: Verify Service Status
       systemd:
         name: "{{ 'k3s' if inventory_hostname == 'node-1' else 'k3s-agent' }}"
         state: started
         enabled: yes
+
+    # 6. Labeling (Hanya dijalankan dari Master atau Localhost)
+    - name: Label Nodes for Disk Affinity
+      shell: |
+        kubectl label node node-1 disktype=ssd --overwrite
+        kubectl label node node-2 disktype=hdd --overwrite
+      delegate_to: node-1
+      run_once: true
+      ignore_errors: true
