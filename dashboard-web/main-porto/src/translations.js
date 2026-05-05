@@ -33,22 +33,26 @@ export const translations = {
     project_1_title: "Home-Lab (Proxmox VE K3s Cluster)",
     project_1_image: project1Img,
     project_1_desc: "A high-availability virtualization-ready K3s infrastructure hosted on Proxmox VE, leveraging GitOps automation, optimized local storage affinity, and secure tunnel-based ingress.",
-    project_1_detail: `1. Compute & Virtualization Layer\n
-    Hypervisor: Proxmox VE (Debian-based). Managing the lifecycle of K3s nodes via Virtual Machines (VMs) or LXC containers.\n
-    Node Provisioning: Using Cloud-Init for automated Ubuntu Server VM deployment, ensuring consistent OS baseline.\n
-    Resource Allocation: Implementing CPU pinning and RAM ballooning to ensure dedicated performance for VictoriaMetrics and Gitea.\n\n
-    2. Storage & Node Affinity (The Proxmox Twist)\n
-    Hardware Passthrough: For SQLite performance, we use Disk Passthrough or high-speed ZFS Local Storage to specific VMs.\n
-    Affinity Mapping: Node Affinity in Kubernetes is strictly mapped to the VM ID holding the physical disk mount, ensuring SQLite data integrity.\n\n
-    3. GitOps & Operational Workflow\n
-    Gitea & FluxCD: Hosted within the cluster. This creates an "Infrastructure as Code" (IaC) environment where Proxmox handles Hardware and FluxCD handles the Software State.\n\n
-    4. Networking (Zero Trust Approach)\n
-    Internal Bridge: Utilizing Proxmox's Linux Bridge (vmbr0) for inter-VM communication.\n
-    Edge Connectivity: Tunnels established at the VM level, bypassing the need for complex NAT/Port Forwarding or MetalLB.\n\n
-    5. Maintenance & Resilience\n
-    Backup Strategy: Utilizing Proxmox Backup Server (PBS) for full VM snapshots, complemented by VictoriaLogs for audit trails.\n
-    High Availability: Provides VM-level HA, automatically restarting nodes on another host if hardware fails.`,
+    project_1_detail: `1. Compute & Virtualization Layer (The LXC Efficiency)\n
+    Hypervisor: Proxmox VE (3-Node Cluster).\n
+    Virtualization Strategy: Menggunakan Full LXC Containers untuk menjalankan K3s. Strategi ini dipilih untuk meminimalkan overhead CPU/RAM, memungkinkan performa maksimal pada prosesor i3 dengan memori terbatas.\n
+    Node Baseline: Standarisasi menggunakan Ubuntu 24.04 dengan penyesuaian profil AppArmor dan /dev/kmsg passthrough untuk menjamin stabilitas Kubelet di dalam kontainer.\n\n
 
+    2. Storage & Persistence Logic\n
+    Local Storage: Memanfaatkan ZFS Local Storage dan bind-mount dari Host Proxmox untuk performa I/O tinggi pada database MariaDB dan VictoriaMetrics.\n
+    Data Integrity: Menggunakan Host-Path Provisioning yang dikombinasikan dengan Node Affinity di Kubernetes. Ini memastikan Pod database selalu berjalan di node fisik yang memiliki disk yang tepat.\n\n
+
+    3. GitOps & Automation Workflow\n
+    Single Source of Truth: Mengintegrasikan Gitea (Internal Git) dan FluxCD.\n
+    Operational Flow: Proxmox mengelola lapisan Hardware/Compute, sementara FluxCD secara otomatis melakukan rekonsiliasi seluruh Software State dan konfigurasi Kubernetes melalui pendekatan Infrastructure as Code (IaC).\n\n
+
+    4. Networking & Zero Trust Access\n
+    Internal Connectivity: Menggunakan Proxmox Linux Bridge (vmbr0) untuk komunikasi antar-node dengan latensi rendah.\n
+    Secure Gateway: Menggunakan Cloudflare Tunnels yang dipasang pada level kontainer. Ini memungkinkan akses luar secara aman tanpa perlu mengekspos IP publik rumah (bypassing NAT/Port Forwarding) dan tanpa membutuhkan MetalLB.\n\n
+
+    5. Observability & Resilience\n
+    Full-Stack Monitoring: Implementasi VictoriaMetrics dan Grafana untuk metrik, serta VictoriaLogs untuk manajemen log terpusat.\n
+    Recovery Plan: Snapshot reguler menggunakan fitur bawaan Proxmox untuk memastikan Mean Time To Recovery (MTTR) yang cepat jika terjadi kegagalan pada level LXC.`,
     project_2_title: "Home-Lab (Bare Metal K3s Cluster)",
     project_2_image: project2Img,
     project_2_desc: "A lean, GitOps-driven K3s infrastructure utilizing high-performance observability via VictoriaMetrics and secure tunneling for seamless application delivery.",
@@ -130,22 +134,26 @@ export const translations = {
     project_1_title: "Home-Lab (Proxmox VE K3s Cluster)",
     project_1_image: project1Img,
     project_1_desc: "Infrastruktur K3s berbasis virtualisasi Proxmox VE yang mengoptimalkan efisiensi resource melalui GitOps (FluxCD) dan observabilitas performa tinggi tanpa dependensi pada storage terdistribusi.",
-    project_1_detail: `1. Layer Virtualisasi & Compute\n
-    Hypervisor: Proxmox VE. Mengelola lifecycle VM atau LXC.\n
-    Node Provisioning: Cloud-Init untuk deployment Ubuntu Server VM yang konsisten.\n
-    Resource Management: CPU Pinning dan RAM Allocation untuk performa maksimal VictoriaMetrics dan Gitea.\n\n
-    2. Strategi Storage & Data Locality\n
-    Persistence: Local Storage ZFS/LVM via Disk Passthrough ke VM.\n
-    Node Affinity: Kubernetes nodeAffinity memastikan Pod SQLite selalu berjalan di VM yang terikat fisik dengan disk storage.\n\n
-    3. Workflow GitOps & Otomasi\n
-    Source of Truth: Gitea sebagai pusat repositori manifest.\n
-    Reconciliation: FluxCD mensinkronisasi state Gitea dengan cluster (IaC).\n\n
-    4. Konektivitas & Networking "Zero Trust"\n
-    Ingress Path: Tunneling (Cloudflare/Tailscale) menggantikan MetalLB atau port forwarding manual.\n
-    Isolation: Jaringan internal via Linux Bridge (vmbr0) Proxmox.\n\n
-    5. Observabilitas & Backup\n
-    Telemetry: VictoriaMetrics dan VictoriaLogs untuk efisiensi resource.\n
-    Safety Net: Proxmox Backup Server (PBS) untuk snapshot level VM.`,
+    project_1_detail: `1. Compute & Virtualization Layer
+    Hypervisor: Proxmox VE (3-Node Cluster).\n
+    Virtualization Strategy: Leveraging Full LXC Containers to host K3s nodes. This approach minimizes CPU/RAM overhead, maximizing performance on i3-based hardware with limited memory.\n
+    Node Baseline: Standardized Ubuntu 24.04 environments with custom AppArmor profiles and /dev/kmsg passthrough to ensure Kubelet stability within containers.\n\n
+
+    2. Storage & Persistence Logic
+    Local Storage: Utilizing ZFS Local Storage and bind-mounts from the Proxmox Host for high-performance I/O required by MariaDB and VictoriaMetrics.\n
+    Data Integrity: Implementing Host-Path Provisioning combined with Node Affinity in Kubernetes. This ensures database pods are strictly mapped to the physical disks where the data resides.\n\n
+
+    3. GitOps & Operational Workflow
+    Single Source of Truth: Integration of Gitea (Internal Git) and FluxCD.\n
+    Operational Flow: Proxmox manages the hardware/compute layer, while FluxCD automatically reconciles the software state and Kubernetes configurations via Infrastructure as Code (IaC).\n\n
+
+    4. Networking & Zero Trust
+    Internal Connectivity: Utilizing Proxmox Linux Bridge (vmbr0) for low-latency inter-node communication.\n
+    Edge Connectivity: Secure access via Cloudflare Tunnels established at the container level. This bypasses complex NAT/Port Forwarding and eliminates the need for MetalLB in a home environment.\n\n
+
+    5. Observability & Resilience
+    Full-Stack Monitoring: Deployment of VictoriaMetrics and Grafana for metrics, alongside VictoriaLogs for centralized log management.\n
+    Recovery Plan: Utilizing Proxmox's native snapshot capabilities for rapid Mean Time To Recovery (MTTR) in the event of LXC failure.`,
 
     project_2_title: "Home-Lab (Bare Metal K3s Cluster)",
     project_2_image: project2Img,
@@ -228,21 +236,26 @@ export const translations = {
     project_1_title: "Home-Lab (Proxmox VE K3s Cluster)",
     project_1_image: project1Img,
     project_1_desc: "Proxmox VE上で構築された高可用性K3sインフラ。GitOps自動化、最適化されたローカルストレージアフィニティ、およびセキュアなトンネル接続を活用。",
-    project_1_detail: `1. コンピュート & 仮想化レイヤー\n
-    ハイパーバイザ: Proxmox VE (Debianベース)。VMまたはLXCコンテナを介してK3sノードのライフサイクルを管理。\n
-    プロビジョニング: Cloud-Initを使用してUbuntu Server VMを自動展開し、一貫したOSベースラインを確保。\n
-    リソース割り当て: CPUピン留めとRAMバルーニングを実装し、VictoriaMetricsとGiteaのパフォーマンスを最適化。\n\n
-    2. ストレージ & ノードアフィニティ\n
-    ハードウェアパススルー: SQLiteの性能向上のため、特定のVMに対してディスクパススルーまたは高速なZFSローカルストレージを使用。\n
-    アフィニティマッピング: KubernetesのNode Affinityにより、物理ディスクを持つVM IDにPodを固定し、データの整合性を維持。\n\n
-    3. GitOps & 運用ワークフロー\n
-    Gitea & FluxCD: 仮想クラスター内に構築。「Infrastructure as Code」(IaC) 環境を実現。\n\n
-    4. ネットワーク (ゼロトラスト)\n
-    内部ブリッジ: ProxmoxのLinux Bridge (vmbr0) を使用したVM間通信。\n
-    接続性: VMレベルでのトンネル接続により、複雑なNAT設定やMetalLBを不要に。\n\n
-    5. 保守 & 復旧\n
-    バックアップ: Proxmox Backup Server (PBS) によるVMスナップショットと、VictoriaLogsによる監査ログの管理。\n
-    高可用性: VMレベルのHAを提供し、ハードウェア故障時に別のホストでノードを自動再起動。`,
+    project_1_detail: `1. コンピュート＆仮想化レイヤー
+    ハイパーバイザー: Proxmox VE (3ノードクラスター)\n
+    仮想化戦略: LXCコンテナ上でK3sノードを運用。 VMではなくLXCを採用することでCPUとメモリのオーバーヘッドを最小限に抑え、リソースの限られたi3ハードウェアで最大限のパフォーマンスを発揮。\n
+    OS環境: Ubuntu 24.04を標準化。AppArmorプロファイルと/dev/kmsgパススルーをカスタマイズし、コンテナ内でのKubeletの安定性を確保。\n\n
+
+    2. ストレージと永続化ロジック
+    ローカルストレージ: ProxmoxホストからのZFSローカルストレージとバインドマウントを活用し、MariaDBやVictoriaMetricsに必要な高パフォーマンスI/Oを実現。\n
+    データ整合性: KubernetesのNode Affinityとホストパスプロビジョニングを組み合わせ、データベースPodが常に物理ディスクの存在するノードで動作するよう最適化。\n\n
+
+    3. GitOps & オペレーショナル・ワークフロー
+    信頼できる唯一の情報源 (SSoT): Gitea (内部Git) と FluxCD の統合。\n
+    ワークフロー: Proxmoxがハードウェアとコンピュート層を管理し、FluxCDがInfrastructure as Code (IaC)を通じてソフトウェアの状態とKubernetes設定を自動的に同期。\n\n
+
+    4. ネットワークとゼロトラスト
+    内部接続: Proxmox Linux Bridge (vmbr0) を利用し、低遅延なノード間通信を実現。\n
+    エッジ接続: Cloudflare Tunnelをコンテナレベルで構築。複雑なNAT/ポートフォワードを回避し、家庭用環境でもMetalLBなしで安全な外部アクセスを提供。\n\n
+
+    5. オブザーバビリティとレジリエンス
+    フルスタック監視: メトリクス管理にVictoriaMetricsとGrafanaを採用し、VictoriaLogsでログ管理を一元化。\n
+    リカバリ計画: Proxmoxのネイティブスナップショット機能を活用し、LXCレベルの障害発生時における平均修復時間 (MTTR) の短縮を実現。`,
 
     project_2_title: "Home-Lab (Bare Metal K3s Cluster)",
     project_2_image: project2Img,
