@@ -68,8 +68,13 @@ export default function TerminalView({ t, lang }) {
         about: () => `NAME   : Dewa Athallah Putra Kamiko\nROLE   : ${t.desc}\nFOCUS  : IT Infrastructure, Automation, Reliability`,
         skills: () => "INFRA  : K8S, Docker, Ansible, Terraform\nCLOUD  : Azure, GCP\nLANGS  : Go, Bash, Python",
         cv: () => {
-          window.open(`/assets/Dewa_Athallah_Putra_Kamiko_CV-${lang}.pdf`, '_blank');
-          return "ACTION: Opening CV in a new tab...";
+          const filePath = `/cv/Dewa_Athallah_Putra_Kamiko_CV-${lang}.pdf`;
+          const win = window.open(filePath, '_blank');
+          if (win) {
+            return `[ACTION]: Viewing CV (${lang.toUpperCase()}) in a new tab...`;
+          } else {
+            return `[ERROR]: Popup blocked! Please allow popups or click here: ${filePath}`;
+          }
         },
         projects: (args) => renderProjects(args), 
         certs: (flags) => {
@@ -87,7 +92,7 @@ export default function TerminalView({ t, lang }) {
             `LOCATION      : Jakarta, Indonesia [ID]`,
           ].join('\n');
 
-          const langStatus = `\n[INFO] : ${wrapText(t.lang_status, 9)}`;
+          const langStatus = `\n[INFO] : ${t.lang_status}`;
           const aiNotice = lang === 'jp' || lang === 'en' ? `\n[NOTE]        : ${t.jp_status}` : '';
 
           return `${baseStatus}${langStatus}${aiNotice}\nLAST_CHECK    : ${timestamp}`;
