@@ -54,8 +54,7 @@ function App() {
   }, [isTerminal]);
 
   const downloadCV = () => {
-    // const filePath = `/cv/Kamiko-CV-${lang}.pdf`;
-    const filePath = `/cv/Resume Letter - Dewa Athallah Putra Kamiko - EN.pdf`;
+    const filePath = `/downloads/cv-en.pdf?v=${new Date().getTime()}`;
     window.open(filePath, '_blank');
   };
 

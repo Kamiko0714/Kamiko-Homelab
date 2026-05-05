@@ -3,17 +3,27 @@ import { Mail, Linkedin, Github, Instagram, Whatsapp, Youtube, ExternalLink } fr
 
 export default function ModernContact({ lang }) {
   const downloadCV = () => {
-    const filePath = `/cv/cv-${lang}.pdf`;
-    window.open(filePath, '_blank');
+    const filePath = `/downloads/cv-en.pdf?v=${new Date().getTime()}`;
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
     <div className="modern-container">
-      {/* Tombol Download CV*/}
       <div className="cv-header">
-        <button onClick={downloadCV} className="neon-btn download-cv">
+        <a 
+          href="/downloads/cv-en.pdf" 
+          target="_blank" 
+          rel="noreferrer"
+          className="neon-btn download-cv"
+          style={{ textDecoration: 'none' }}
+        >
           {lang === 'id' ? 'Unduh CV' : lang === 'jp' ? '履歴書' : 'Download CV'}
-        </button>
+        </a>
       </div>
 
       <div className="contact-grid">
