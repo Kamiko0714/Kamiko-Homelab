@@ -68,7 +68,7 @@ export default function TerminalView({ t, lang }) {
         about: () => `NAME   : Dewa Athallah Putra Kamiko\nROLE   : ${t.desc}\nFOCUS  : IT Infrastructure, Automation, Reliability`,
         skills: () => "INFRA  : K8S, Docker, Ansible, Terraform\nCLOUD  : Azure, GCP\nLANGS  : Go, Bash, Python",
         cv: () => {
-          const filePath = `/cv/Dewa_Athallah_Putra_Kamiko_CV-${lang}.pdf`;
+          const filePath = `/cv/cv-${lang}.pdf`;
           const win = window.open(filePath, '_blank');
           if (win) {
             return `[ACTION]: Viewing CV (${lang.toUpperCase()}) in a new tab...`;
