@@ -3,7 +3,7 @@ import { Mail, Linkedin, Github, Instagram, Whatsapp, Youtube, ExternalLink } fr
 
 export default function ModernContact({ lang }) {
   const downloadCV = () => {
-    const filePath = `/assets/cv-${lang}.pdf`;
+    const filePath = `/assets/Dewa_Athallah_Putra_Kamiko_CV-${lang}.pdf`;
     window.open(filePath, '_blank');
   };
 
