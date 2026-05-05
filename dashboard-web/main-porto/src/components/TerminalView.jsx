@@ -68,7 +68,7 @@ export default function TerminalView({ t, lang }) {
         about: () => `NAME   : Dewa Athallah Putra Kamiko\nROLE   : ${t.desc}\nFOCUS  : IT Infrastructure, Automation, Reliability`,
         skills: () => "INFRA  : K8S, Docker, Ansible, Terraform\nCLOUD  : Azure, GCP\nLANGS  : Go, Bash, Python",
         cv: () => {
-          window.open(`/assets/Dewa_Athallah_Putra_Kamiko_CV-${lang}.pdf`, '_blank');
+          window.open(`/dist/cv/Dewa_Athallah_Putra_Kamiko_CV-${lang}.pdf`, '_blank');
           return "ACTION: Opening CV in a new tab...";
         },
         projects: (args) => renderProjects(args), 
