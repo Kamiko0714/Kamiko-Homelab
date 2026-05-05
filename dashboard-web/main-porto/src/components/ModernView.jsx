@@ -116,8 +116,8 @@ export default function ModernView({ t, lang }) {
           <div className="card-badge-shimmer">{t.projects_title}</div>
           <div className="projects-grid-2x2"> 
             {[
-              { title: t.project_1_title, desc: t.project_1_desc, detail: t.project_1_detail, image: t.project_1_image, tools: [Globe], status: "Planned", statusClass: "status-planned" },
-              { title: t.project_2_title, desc: t.project_2_desc, detail: t.project_2_detail, image: t.project_2_image, tools: [Lightbulb], status: "Running", statusClass: "status-running" },
+              { title: t.project_1_title, desc: t.project_1_desc, detail: t.project_1_detail, image: t.project_1_image, tools: [Globe], status: "Running", statusClass: "status-running" },
+              { title: t.project_2_title, desc: t.project_2_desc, detail: t.project_2_detail, image: t.project_2_image, tools: [Lightbulb], status: "Completed", statusClass: "status-completed" },
               { title: t.project_3_title, desc: t.project_3_desc, detail: t.project_3_detail, image: t.project_3_image, tools: [Settings], status: "Completed", statusClass: "status-completed" },
               { title: t.project_4_title, desc: t.project_4_desc, detail: t.project_4_detail, image: t.project_4_image, tools: [Shield], status: "Completed", statusClass: "status-completed" }
             ].map((proj, i) => (
