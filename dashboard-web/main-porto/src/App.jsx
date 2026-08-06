@@ -54,7 +54,7 @@ function App() {
   }, [isTerminal]);
 
   const downloadCV = () => {
-    const filePath = `/downloads/cv-en.pdf?v=${new Date().getTime()}`;
+    const filePath = `/downloads/Dewa_Athallah_Putra_Kamiko_CV.pdf?v=${new Date().getTime()}`;
     window.open(filePath, '_blank');
   };
 

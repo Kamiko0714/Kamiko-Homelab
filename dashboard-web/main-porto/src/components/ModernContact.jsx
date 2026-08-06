@@ -3,7 +3,7 @@ import { Mail, Linkedin, Github, Instagram, Whatsapp, Youtube, ExternalLink } fr
 
 export default function ModernContact({ lang }) {
   const downloadCV = () => {
-    const filePath = `/downloads/cv-en.pdf?v=${new Date().getTime()}`;
+    const filePath = `/downloads/Dewa_Athallah_Putra_Kamiko_CV.pdf?v=${new Date().getTime()}`;
     const link = document.createElement('a');
     link.href = filePath;
     link.target = '_blank';
@@ -16,7 +16,7 @@ export default function ModernContact({ lang }) {
     <div className="modern-container">
       <div className="cv-header">
         <a 
-          href="/downloads/cv-en.pdf" 
+          href="/downloads/Dewa_Athallah_Putra_Kamiko_CV.pdf" 
           target="_blank" 
           rel="noreferrer"
           className="neon-btn download-cv"

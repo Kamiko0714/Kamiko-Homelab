@@ -80,8 +80,12 @@ export default function ModernView({ t, lang }) {
             <div className="exp-item">
               <div className="exp-content">
                 <div className="exp-main-row">
+                  <h3 className="exp-title">Cloud Engineer</h3>
+                  <span className="exp-period">06/2026 — {t.exp_now}</span>
+                </div>
+                <div className="exp-main-row">
                   <h3 className="exp-title">DevOps Trainee</h3>
-                  <span className="exp-period">2025 — {t.exp_now}</span>
+                  <span className="exp-period">11/2025 — 05/2026</span>
                 </div>
                 <div className="exp-company">PT. Tiga Daya Digital Indonesia — (Triputra Group)</div>
                 <p className="exp-detail">Eksad Technology</p>
@@ -197,14 +201,14 @@ export default function ModernView({ t, lang }) {
                 <img src={WhatsAppIcon} alt="WA" />
                 <div className="node-line"></div>
               </a>
-              {/* <a href="https://line.me/ti/p/9dzEKkRqQ2" target="_blank" className="node-satellite line">
+              <a href="https://line.me/ti/p/9dzEKkRqQ2" target="_blank" className="node-satellite line">
                 <img src={LineIcon} alt="LINE" />
                 <div className="node-line"></div>
               </a>
               <a href="https://discordapp.com/users/1282546253707608135" target="_blank" className="node-satellite discord">
                 <img src={DiscordIcon} alt="Discord" />
                 <div className="node-line"></div>
-              </a> */}
+              </a>
             </div>
           </div>
         </div>
